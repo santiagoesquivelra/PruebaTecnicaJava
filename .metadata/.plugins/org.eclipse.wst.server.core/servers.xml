@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<servers>
+  <server auto-publish-time="0" hostname="localhost" id="Liferay 7.x at localhost" name="Liferay 7.x at localhost" runtime-id="Liferay Community Edition Portal 7.4.3.106 CE GA106" server-type="com.liferay.ide.server.portal" server-type-id="com.liferay.ide.server.portal" start-timeout="900" stop-timeout="300" timestamp="17">
+    <list key="modules" value0="employee-web::com.liferay.ide.project.core.bundleFactory:employee-web::liferay.bundle::1.0" value1="Employee-service::com.liferay.ide.project.core.bundleFactory:Employee-service::liferay.bundle::1.0" value2="Employee-api::com.liferay.ide.project.core.bundleFactory:Employee-api::liferay.bundle::1.0"/>
+  </server>
+</servers>

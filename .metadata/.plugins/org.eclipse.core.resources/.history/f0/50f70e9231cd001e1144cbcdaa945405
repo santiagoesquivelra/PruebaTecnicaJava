@@ -1,0 +1,33 @@
+<%@ include file="/init.jsp" %>
+
+<p>
+	<!-- <b><liferay-ui:message key="employeecontroller.caption"/></b> -->
+</p>
+
+<portlet:renderURL var="createEditRender"> 
+	<portlet:param name="mvcRenderCommandName" value="/create/edit"/>
+</portlet:renderURL>
+
+<aui:button cssClass="btn btn-primary" name="Crear cliente" type="submit" href="${createEditRender}">
+</aui:button>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Edad</th>
+            <th>Número de Teléfono</th>
+            <th>Dirección</th>
+        </tr>
+    </thead>
+    <tbody>
+        <c:forEach var="createEditRender" items="${createEditRender}">
+            <tr>
+                <td>${employee.name}</td>
+                <td>${employee.age}</td>
+                <td>${employee.phoneNumber}</td>
+                <td>${employee.address}</td>
+            </tr>
+        </c:forEach>
+    </tbody>
+</table>

@@ -1,0 +1,12 @@
+<%@ include file="/init.jsp" %>
+
+<p>
+	<!-- <b><liferay-ui:message key="employeecontroller.caption"/></b> -->
+</p>
+
+<portlet:renderURL var="createEditRender"> 
+	<portlet:param name="mvcRenderCommandName" value="/create/edit"/>
+</portlet:renderURL>
+
+<aui:button cssClass="btn btn-primary" name="Crear cliente" type="submit" href="${createEditRender}">
+</aui:button>

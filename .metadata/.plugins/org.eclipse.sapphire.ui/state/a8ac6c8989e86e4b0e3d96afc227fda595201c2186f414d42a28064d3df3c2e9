@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MasterDetailsEditorPageState>
+    <ContentOutlineState>
+        <Root>
+            <Children>
+                <MasterDetailsNodeState>
+                    <Label>Service Builder</Label>
+                    <Expanded>true</Expanded>
+                    <Children>
+                        <MasterDetailsNodeState>
+                            <Label>Entities</Label>
+                            <Expanded>true</Expanded>
+                            <Children>
+                                <MasterDetailsNodeState>
+                                    <Label>Employee</Label>
+                                    <Expanded>true</Expanded>
+                                    <Children>
+                                        <MasterDetailsNodeState>
+                                            <Label>Columns</Label>
+                                            <Selected>true</Selected>
+                                        </MasterDetailsNodeState>
+                                    </Children>
+                                </MasterDetailsNodeState>
+                            </Children>
+                        </MasterDetailsNodeState>
+                    </Children>
+                </MasterDetailsNodeState>
+            </Children>
+        </Root>
+        <Ratio>0.297442799461642</Ratio>
+    </ContentOutlineState>
+</MasterDetailsEditorPageState>

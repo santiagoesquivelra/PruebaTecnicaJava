@@ -1,0 +1,25 @@
+<%@ include file="/init.jsp" %>
+
+<portlet:actionURL name="saveEmployee" var="saveEmployeeURL" >
+	
+</portlet:actionURL>
+<h1>Crea una nueva persona</h1>
+
+<aui:form name="fm" action="${saveEmployeeURL}">
+
+ <aui:input label="nombre" name="name" type="text">
+ 	<aui:validator name="required"/>
+ </aui:input>
+ 
+ <aui:input name="address"></aui:input>
+ 	<aui:validator name="required"/>
+ <aui:input name="phoneNo"></aui:input>
+ 	<aui:validator name="required"/>
+ <aui:input name="age"></aui:input>
+	<aui:validator name="required"/>
+ <aui:button-row>
+ 	<aui:button cssClass="btn btn-primary" type="submit"/>
+ </aui:button-row>
+
+</aui:form>
+

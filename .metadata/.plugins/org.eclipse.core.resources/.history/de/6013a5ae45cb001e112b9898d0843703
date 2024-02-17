@@ -1,0 +1,10 @@
+<%@ include file="/init.jsp" %>
+
+<p>
+	<!-- <b><liferay-ui:message key="employeecontroller.caption"/></b> -->
+	
+	Hi this is a text!!
+</p>
+
+<portlet:renderURL>
+<portlet:renderURL/>

@@ -1,0 +1,98 @@
+package com.lr.revisited.portlet;
+
+import com.liferay.adaptive.media.exception.AMRuntimeException.IOException;
+import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
+import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.revisated.service.EmployeeService;
+import com.lr.revisited.constants.EmployeeControllerPortletKeys;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
+
+@Component(immediate = true, property = 
+      { "javax.portlet.name=" + EmployeeControllerPortletKeys.EMPLOYEECONTROLLER,
+		"mvc.command.name=saveEmployee" },
+ 
+		service = MVCActionCommand.class)
+public class SaveActionMvcCommand extends BaseMVCActionCommand {
+	
+	
+	@Override
+	protected void doProcessAction(ActionRequest actionRequest, ActionResponse actionResponse) throws Exception {
+		
+		String name = ParamUtil.get(actionRequest, "name", "");
+		String address = ParamUtil.get(actionRequest, "address", "");
+		String phoneNo = ParamUtil.get(actionRequest, "phoneNo", "");
+		int age = ParamUtil.get(actionRequest, "age", 0);
+
+		
+		System.out.println(name + " - " + address + " - " + phoneNo + " - " + age );
+		
+		System.out.println("SaveActionMvcCommand.doProcessAction()");
+		
+		// URL del servicio web al que deseas hacer la solicitud POST
+        String serviceUrl = "https://8e7c6b8a-fc46-4674-a529-4ebec57295d3.mock.pstmn.io/customers";
+
+        // Crear la conexión
+        URL url = new URL(serviceUrl);
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+        // Configurar la conexión para realizar una solicitud POST
+        connection.setRequestMethod("POST");
+        connection.setDoOutput(true);
+
+        // Crear los datos que se enviarán en la solicitud POST
+        String postData = "name=" + name + "&address=" + address + "&phoneNo=" + phoneNo + "&age=" + age;
+        byte[] postDataBytes = postData.getBytes(StandardCharsets.UTF_8);
+
+        // Enviar los datos en el cuerpo de la solicitud
+        try (OutputStream os = connection.getOutputStream()) {
+            os.write(postDataBytes);
+            os.flush();
+        }
+
+        // Obtener la respuesta del servicio web (opcional)
+        int responseCode = connection.getResponseCode();
+        System.out.println("Codigo de respuesta metodo: " + responseCode);
+
+        // Leer la respuesta (opcional)
+        try (InputStream is = connection.getInputStream()) {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
+            String line;
+            StringBuilder response = new StringBuilder();
+
+            while ((line = reader.readLine()) != null) {
+                response.append(line);
+            }
+            
+            // Procesar la respuesta como necesario
+            String responseData = new String(response.toString().getBytes("ISO-8859-1"), "UTF-8");
+            
+            // Eliminar los signos de interrogación no deseados
+            responseData = responseData.replaceAll("\\?", "");
+
+            // La variable 'response' ahora contiene la respuesta del servicio web
+            System.out.println("Respuesta del servicio: " + responseData.toString());
+        } catch (IOException e) {
+            // Manejar excepciones de lectura de la respuesta
+            e.printStackTrace();
+        }
+
+        // Cerrar la conexión
+        connection.disconnect();
+   		
+	}
+	
+}

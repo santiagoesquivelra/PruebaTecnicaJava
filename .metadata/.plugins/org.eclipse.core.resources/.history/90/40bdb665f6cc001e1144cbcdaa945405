@@ -1,0 +1,42 @@
+<%@ include file="/init.jsp" %>
+
+<portlet:actionURL name="saveEmployee" var="saveEmployeeURL" >
+	
+</portlet:actionURL>
+<h1>Crea una nueva persona</h1>
+
+<aui:form name="fm" action="${saveEmployeeURL}">
+
+ <aui:input name="name"></aui:input>
+ 
+ <aui:input name="address"></aui:input>
+ 
+ <aui:input name="phoneNo"></aui:input>
+ 
+ <aui:input name="age"></aui:input>
+
+ <aui:button-row>
+ 	<aui:button cssClass="btn btn-primary" type="submit"/>
+ </aui:button-row>
+
+</aui:form>
+
+<script type="text/javascript">
+    function validateForm() {
+        var name = document.forms["fm"]["name"].value;
+        var address = document.forms["fm"]["address"].value;
+        var phoneNo = document.forms["fm"]["phoneNo"].value;
+        var age = document.forms["fm"]["age"].value;
+        console.log("OK")
+        // Realizar validaciones, por ejemplo, verificar si los campos están vacíos
+        if (name === "" || address === "" || phoneNo === "" || age === "") {
+            alert("Todos los campos son obligatorios");
+            console.log("OK")
+            return false;
+        }
+
+        // Agregar más validaciones según sea necesario
+
+        return true; // Envía el formulario si todas las validaciones son exitosas
+    }
+</script>

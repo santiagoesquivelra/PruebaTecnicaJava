@@ -1,0 +1,24 @@
+package com.lr.revisited.portlet;
+
+public class Customer {
+
+	public Customer() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public void setName(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setAge(int int1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setPhoneNo(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

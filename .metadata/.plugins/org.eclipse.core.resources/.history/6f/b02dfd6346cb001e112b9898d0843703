@@ -1,0 +1,5 @@
+package com.lr.revisited.portlet;
+
+public class CreateEditRenderMvcCommand {
+
+}

@@ -1,0 +1,12 @@
+#
+#Thu Feb 15 19:07:31 COT 2024
+derivedResources=.gradle;build
+linkedResources=
+classpath=<?xml version\="1.0" encoding\="UTF-8"?>\n<classpath>\n<classpathentry kind\="lib" path\="C\:/Users/Sanks/.gradle/caches/modules-2/files-2.1/com.liferay.portal/release.dxp.api/7.4.13.u102/b481a6c6410bfabe73eac9a3339b28c40d1b7b24/release.dxp.api-7.4.13.u102.jar" sourcepath\="C\:/Users/Sanks/.gradle/caches/modules-2/files-2.1/com.liferay.portal/release.dxp.api/7.4.13.u102/d3bdb7e6dc9ed332e0d8362c3369d01e07c94e1a/release.dxp.api-7.4.13.u102-sources.jar">\r\n\t<attributes>\r\n\t\t<attribute name\="gradle_used_by_scope" value\=""/>\r\n\t</attributes>\r\n</classpathentry>\r\n<classpathentry kind\="lib" path\="C\:/Users/Sanks/.gradle/caches/modules-2/files-2.1/com.liferay/com.liferay.petra.sql.dsl.api/6.0.0/59da92091c275793dfc291014cea96024f077b9c/com.liferay.petra.sql.dsl.api-6.0.0.jar" sourcepath\="C\:/Users/Sanks/.gradle/caches/modules-2/files-2.1/com.liferay/com.liferay.petra.sql.dsl.api/6.0.0/7f83e4499699a7074c59533373f90be58d962218/com.liferay.petra.sql.dsl.api-6.0.0-sources.jar">\r\n\t<attributes>\r\n\t\t<attribute name\="gradle_used_by_scope" value\=""/>\r\n\t</attributes>\r\n</classpathentry>\r\n<classpathentry kind\="lib" path\="C\:/Users/Sanks/.gradle/caches/modules-2/files-2.1/com.liferay.portal/release.portal.api/7.3.3-ga4/a1795181451628089624316a184cab7a0f76baf/release.portal.api-7.3.3-ga4.jar" sourcepath\="C\:/Users/Sanks/.gradle/caches/modules-2/files-2.1/com.liferay.portal/release.portal.api/7.3.3-ga4/2903d21c64f54818e4fcf37f1d2a569d6b25b659/release.portal.api-7.3.3-ga4-sources.jar">\r\n\t<attributes>\r\n\t\t<attribute name\="gradle_used_by_scope" value\=""/>\r\n\t</attributes>\r\n</classpathentry>\r\n</classpath>\n
+managedNatures=org.eclipse.jdt.core.javanature
+buildDir=build
+managedBuilders=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><commands/>
+buildScriptPath=build.gradle
+subprojectPaths=
+hasAutoBuildTasks=false
+gradleVersion=6.6.1

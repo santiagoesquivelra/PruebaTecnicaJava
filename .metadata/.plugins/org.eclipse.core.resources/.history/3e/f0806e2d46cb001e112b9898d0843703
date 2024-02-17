@@ -1,0 +1,13 @@
+<%@ include file="/init.jsp" %>
+
+<p>
+	<!-- <b><liferay-ui:message key="employeecontroller.caption"/></b> -->
+	
+	Hi this is a text!!
+</p>
+
+<portlet:renderURL var="createEditRender"> 
+	<portlet:param name="mvcRenderCommandName" value="/create/edit"/>
+</portlet:renderURL>
+
+<a href="${createEditRender}"></a>

@@ -1,0 +1,65 @@
+<portlet:actionURL name="saveEmployee" var="saveEmployeeURL" />
+
+<h1>Crea una nueva persona</h1>
+
+<aui:form name="fm" action="${saveEmployeeURL}" onSubmit="return validateForm();">
+
+    <aui:input name="name"></aui:input>
+    <aui:input name="address"></aui:input>
+    <aui:input name="phoneNo"></aui:input>
+    <aui:input name="age"></aui:input>
+
+    <aui:button-row>
+        <aui:button cssClass="btn btn-primary" type="submit"/>
+    </aui:button-row>
+
+</aui:form>
+
+<script type="text/javascript">
+    function validateForm() {
+        var name = document.forms["fm"]["name"].value;
+        var address = document.forms["fm"]["address"].value;
+        var phoneNo = document.forms["fm"]["phoneNo"].value;
+        var age = document.forms["fm"]["age"].value;
+
+        // Validación de obligatoriedad de los campos
+        if (name.trim() === "" || address.trim() === "" || phoneNo.trim() === "" || age.trim() === "") {
+            alert("Todos los campos son obligatorios");
+            return false;
+        }
+
+        // Validación del tipo de dato permitido
+        if (!/^\d+$/.test(age)) {
+            alert("El campo age debe ser un número entero");
+            return false;
+        }
+
+        // Validación del formato de address XXXX 99 # 99XXX – 99XXX
+        if (!/^.{4} \d{2} # \d{2}.{3} \d{2}.{3}$/.test(address)) {
+            alert("El campo address debe tener el formato XXXX 99 # 99XXX – 99XXX");
+            return false;
+        }
+
+        // Validación del formato de phoneNumber 9999999999
+        if (!/^\d{10}$/.test(phoneNo)) {
+            alert("El campo phoneNumber debe tener el formato 9999999999");
+            return false;
+        }
+
+        // Validación del formato de age 99
+        if (!/^\d{1,2}$/.test(age)) {
+            alert("El campo age debe tener el formato 99");
+            return false;
+        }
+
+        // Validación del formato de name (camel case, longitud no mayor a 50 caracteres)
+        if (!/^[A-Z][a-z]+( [A-Z][a-z]+){0,4}$/.test(name) || name.length > 50) {
+            alert("El campo name debe tener formato camel case y longitud no mayor a 50 caracteres");
+            return false;
+        }
+
+        // Agregar más validaciones según sea necesario
+
+        return true; // Envía el formulario si todas las validaciones son exitosas
+    }
+</script>

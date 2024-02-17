@@ -1,0 +1,12 @@
+dependencies {
+	compile project(":modules:Employee:Employee-api")
+
+	compileOnly group: "com.liferay.portal", name: "release.dxp.api"
+	compileOnly group: "com.liferay", name: 'com.liferay.petra.sql.dsl.api'
+}
+
+buildService {
+	apiDir = "../Employee-api/src/main/java"
+}
+
+group = "com.liferay.revisated"

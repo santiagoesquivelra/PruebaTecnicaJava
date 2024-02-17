@@ -1,0 +1,78 @@
+package com.lr.revisited.portlet;
+
+import com.lr.revisited.constants.EmployeeControllerPortletKeys;
+
+import java.io.IOException;
+
+import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.revisated.service.EmployeeService;
+
+import javax.portlet.Portlet;
+import javax.portlet.PortletException;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
+
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
+
+/**
+ * @author Sanks
+ */
+@Component(
+	immediate = true,
+	property = {
+		"com.liferay.portlet.display-category=category.sample",
+		"com.liferay.portlet.header-portlet-css=/css/main.css",
+		"com.liferay.portlet.instanceable=true",
+		"javax.portlet.display-name=EmployeeController",
+		"javax.portlet.init-param.template-path=/",
+		"javax.portlet.init-param.view-template=/view.jsp",
+		"javax.portlet.name=" + EmployeeControllerPortletKeys.EMPLOYEECONTROLLER,
+		"javax.portlet.resource-bundle=content.Language",
+		"javax.portlet.security-role-ref=power-user,user"
+	},
+	service = Portlet.class
+)
+public class EmployeeControllerPortlet extends MVCPortlet {
+	
+	@Override
+	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
+	try {
+        // URL del endpoint que deseas consumir
+        String endpointUrl = "https://api.example.com/data";
+
+        // Crear una conexión HTTP
+        URL url = new URL(endpointUrl);
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("GET");
+
+        // Leer la respuesta
+        BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        StringBuilder responseBuilder = new StringBuilder();
+        String line;
+
+        while ((line = reader.readLine()) != null) {
+            responseBuilder.append(line);
+        }
+
+        // Procesar la respuesta como necesario
+        String responseData = responseBuilder.toString();
+
+        // Puedes imprimir la respuesta o realizar acciones adicionales según tus necesidades
+        System.out.println("Respuesta del Endpoint: " + responseData);
+
+        // Cerrar la conexión y el lector
+        reader.close();
+        connection.disconnect();
+    } catch (Exception e) {
+        // Manejar excepciones según tus necesidades
+        e.printStackTrace();
+    }
+			throws IOException, PortletException {
+			
+		System.out.println("EmployeeControllerPortlet.doView()  -- >");
+		
+		super.doView(renderRequest, renderResponse);
+	}
+
+}

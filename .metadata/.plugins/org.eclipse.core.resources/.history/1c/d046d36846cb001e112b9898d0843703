@@ -1,0 +1,7 @@
+package com.lr.revisited.portlet;
+
+import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
+
+public class CreateEditRenderMvcCommand implements MVCRenderCommand {
+
+}

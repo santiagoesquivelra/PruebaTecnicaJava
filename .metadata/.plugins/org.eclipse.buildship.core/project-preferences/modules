@@ -1,0 +1,12 @@
+#
+#Thu Feb 15 19:07:31 COT 2024
+derivedResources=.gradle;build;Employee/build;employee-web/build;Employee/Employee-api/build;Employee/Employee-service/build
+linkedResources=
+classpath=<?xml version\="1.0" encoding\="UTF-8"?>\n<classpath>\n</classpath>\n
+managedNatures=
+buildDir=build
+managedBuilders=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><commands/>
+buildScriptPath=build.gradle
+subprojectPaths=Employee;employee-web;Employee/Employee-api;Employee/Employee-service
+hasAutoBuildTasks=false
+gradleVersion=6.6.1

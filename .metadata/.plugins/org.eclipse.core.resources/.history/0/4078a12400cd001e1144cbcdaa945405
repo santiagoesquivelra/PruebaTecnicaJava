@@ -1,0 +1,46 @@
+<%@ include file="/init.jsp" %>
+
+<portlet:actionURL name="saveEmployee" var="saveEmployeeURL" >
+	
+</portlet:actionURL>
+<h1>Crea una nueva persona</h1>
+
+<aui:form name="fm" action="${saveEmployeeURL}">
+
+ <aui:input label="Nombre" name="name" type="text">
+ 	<aui:validator name="required"/>
+ 	<aui:validator name="custom" errorMessage="El nombre debe tener siempre la primera en mayuscula">
+ 		function(value, obj, ruleValue) {
+ 			return /^[A-Z][a-z]+( [A-Z][a-z]+){0,4}$/.test(value) && value.length <= 50;
+ 		}
+ 	</aui:validator>
+ </aui:input>
+ 
+ <aui:input name="address" label="Direccion" type="text">
+ 	<aui:validator name="required"/>
+ 	<aui:validator name="custom" errorMessage="El formato de address debe ser: XXXX 99 # 99XXX - 99XXX">
+ 		function(value, obj, ruleValue) {
+ 			return /^[\p{L}\d\s]{4} \d{2} # \d{2}[\p{L}\d\s-]{3} \d{2}[\p{L}\d\s-]{3}$/.test(value);
+ 		}
+ 	</aui:validator>
+ </aui:input>
+ 	
+ <aui:input name="phoneNo" label="Numero de celular" type="number">
+ 	<aui:validator name="required"/>
+ </aui:input>
+ 	
+ <aui:input name="age" label="Edad" type="number">
+ 	<aui:validator name="required"/>
+ 	<aui:validator name="custom" errorMessage="El campo age debe tener el formato 99">
+        function(value, obj, ruleValue) {
+            return /^\d{1,2}$/.test(value);
+        }
+    </aui:validator>
+ </aui:input>
+	
+ <aui:button-row>
+ 	<aui:button cssClass="btn btn-primary" type="submit"/>
+ </aui:button-row>
+
+</aui:form>
+

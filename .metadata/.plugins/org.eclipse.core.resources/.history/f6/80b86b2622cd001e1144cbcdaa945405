@@ -1,0 +1,127 @@
+package com.lr.revisited.portlet;
+
+import com.lr.revisited.constants.EmployeeControllerPortletKeys;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+
+import javax.portlet.Portlet;
+import javax.portlet.PortletException;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
+
+import org.osgi.service.component.annotations.Component;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+/**
+ * @author Sanks
+ */
+@Component(
+	immediate = true,
+	property = {
+		"com.liferay.portlet.display-category=category.sample",
+		"com.liferay.portlet.header-portlet-css=/css/main.css",
+		"com.liferay.portlet.instanceable=true",
+		"javax.portlet.display-name=EmployeeController",
+		"javax.portlet.init-param.template-path=/",
+		"javax.portlet.init-param.view-template=/view.jsp",
+		"javax.portlet.name=" + EmployeeControllerPortletKeys.EMPLOYEECONTROLLER,
+		"javax.portlet.resource-bundle=content.Language",
+		"javax.portlet.security-role-ref=power-user,user"
+	},
+	service = Portlet.class
+)
+public class EmployeeControllerPortlet extends MVCPortlet {
+	
+	@Override
+	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
+			throws IOException, PortletException {
+		
+		try {
+            // URL del endpoint que deseas consumir
+            String endpointUrl = "https://8e7c6b8a-fc46-4674-a529-4ebec57295d3.mock.pstmn.io/customers";
+
+            // Crear una conexión HTTP
+            URL url = new URL(endpointUrl);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Accept-Charset", "UTF-8");
+
+            // Leer la respuesta
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
+            
+            StringBuilder responseBuilder = new StringBuilder();
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                responseBuilder.append(line);
+            }
+            
+            System.out.println(responseBuilder);
+            System.out.println(responseBuilder);
+            String responseErr = responseBuilder.toString(); // Corrección: obtener la cadena completa
+
+            // Reemplazar el carácter "â€“" con el guion simple "-"
+            responseErr = responseErr.replace("â€“", "-");
+            // Procesar la respuesta como necesario
+            String responseData = new String(responseBuilder.toString().getBytes("ISO-8859-1"), "UTF-8");
+            // Eliminar los signos de interrogación no deseados
+            responseData = responseData.replaceAll("\\?", "\"");
+            
+            // Puedes imprimir la respuesta o realizar acciones adicionales según tus necesidades
+            System.out.println("Respuesta del Endpoint: " + responseData);
+            
+         // Procesar la respuesta como necesario
+          /*  JSONArray jsonArray = new JSONArray(responseData);
+
+            // Crear listas para almacenar datos
+            List<String> names = new ArrayList<>();
+            List<Integer> ages = new ArrayList<>();
+            List<String> phoneNumbers = new ArrayList<>();
+            List<String> addresses = new ArrayList<>();
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                // Obtener los datos del objeto JSON
+                String name = jsonObject.getString("name");
+                int age = jsonObject.getInt("age");
+                String phoneNumber = jsonObject.getString("phoneNumber");
+                String address = jsonObject.getString("address");
+
+                // Almacenar datos en listas
+                names.add(name);
+                ages.add(age);
+                phoneNumbers.add(phoneNumber);
+                addresses.add(address);
+            }
+
+            // Almacenar las listas en el contexto para que estén disponibles en la vista JSP
+            renderRequest.setAttribute("names", names);
+            renderRequest.setAttribute("ages", ages);
+            renderRequest.setAttribute("phoneNumbers", phoneNumbers);
+            renderRequest.setAttribute("addresses", addresses);
+            */
+            // Cerrar la conexión y el lector
+            reader.close();
+            connection.disconnect();
+        } catch (Exception e) {
+            // Imprimir la ruta de excepciones
+            e.printStackTrace();
+        }
+			
+		System.out.println("EmployeeControllerPortlet.doView()  -- >");
+		
+		super.doView(renderRequest, renderResponse);
+	}
+
+}

@@ -1,0 +1,7 @@
+<%@ include file="/init.jsp" %>
+
+<portlet:actionURL name="saveEmployee" var="saveEmployeeURL" >
+	
+</portlet:actionURL> 
+
+<a href="${saveEmployeeURL}">SAVE</a>

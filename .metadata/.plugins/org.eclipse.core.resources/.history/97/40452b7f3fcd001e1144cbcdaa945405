@@ -1,0 +1,101 @@
+public class EmployeeControllerPortlet extends MVCPortlet {
+
+    private static final String apiUrl = "https://8e7c6b8a-fc46-4674-a529-4ebec57295d3.mock.pstmn.io/customers";
+    private static final Logger logger = Logger.getLogger(EmployeeControllerPortlet.class.getName());
+
+    @Override
+    public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
+            throws IOException, PortletException {
+
+        try {
+            // Crear la URL y abrir la conexión HTTP
+            URL url = new URL(apiUrl);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+            // Configurar la solicitud
+            connection.setRequestMethod("GET");
+
+            // Obtener la respuesta
+            int responseCode = connection.getResponseCode();
+
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                // Leer la respuesta y procesarla
+                processApiResponse(connection, renderRequest);
+
+            } else {
+                handleErrorResponse(responseCode);
+            }
+
+            // Cerrar la conexión
+            connection.disconnect();
+        } catch (Exception e) {
+            handleException(e);
+        }
+
+        System.out.println("EmployeeControllerPortlet.doView()  -- >");
+
+        super.doView(renderRequest, renderResponse);
+    }
+
+    private void processApiResponse(HttpURLConnection connection, RenderRequest renderRequest)
+            throws IOException {
+        try (BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"))) {
+            StringBuilder response = new StringBuilder();
+            String inputLine;
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+
+            String processedResponse = processResponseString(response.toString());
+            JSONArray jsonArray = JSONFactoryUtil.createJSONArray(processedResponse);
+
+            List<Customer> customerList = buildCustomerList(jsonArray);
+
+            renderRequest.setAttribute("customerList", customerList);
+            logCustomerList(customerList);
+        }
+    }
+
+    private String processResponseString(String response) {
+        String processedResponse = new String(response.getBytes("ISO-8859-1"), "UTF-8");
+        processedResponse = processedResponse.replace("?", "\"");
+        processedResponse = processedResponse.replace("\"Calle 53 # 31A \" 56\"", "\"Calle 53 # 31A - 56\"");
+        System.out.println("Respuesta del endpoint: " + processedResponse);
+        return processedResponse;
+    }
+
+    private List<Customer> buildCustomerList(JSONArray jsonArray) {
+        List<Customer> customerList = new ArrayList<>();
+
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+            Customer customer = new Customer();
+            customer.setName(jsonObject.getString("name"));
+            customer.setAge(jsonObject.getInt("age"));
+            customer.setPhoneNo(jsonObject.getString("phoneNumber"));
+            customer.setAddress(jsonObject.getString("address"));
+
+            customerList.add(customer);
+        }
+
+        return customerList;
+    }
+
+    private void logCustomerList(List<Customer> customerList) {
+        for (Customer customer : customerList) {
+            System.out.println("Customer: " + customer.getName() + ", " +
+                    customer.getAge() + ", " + customer.getPhoneNo() + ", " + customer.getAddress());
+        }
+    }
+
+    private void handleErrorResponse(int responseCode) {
+        System.out.println("Error al consumir la API. Código de respuesta: " + responseCode);
+    }
+
+    private void handleException(Exception e) {
+        e.printStackTrace();
+        logger.log(Level.SEVERE, "Error al procesar la solicitud", e);
+    }
+}
